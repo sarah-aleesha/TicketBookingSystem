@@ -25,8 +25,7 @@ public class Vendor implements Runnable{
     public void setTicketsSold(int ticketsSold) {
         this.ticketsSold = ticketsSold;
     }
-    public void addTickets(TicketPool){
-
+    public void addTickets(TicketPool tickets){
     }
 
     @Override
