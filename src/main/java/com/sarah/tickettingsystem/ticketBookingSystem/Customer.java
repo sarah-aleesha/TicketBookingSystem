@@ -8,7 +8,7 @@ public class Customer {
         this.name = name;
     }
     public void removeTicket(TicketPool ticket){
-        int currentNoOfTickets = ticket.getNoOfTickets();
+        int currentNoOfTickets = ticket.getMaximumNoOfTickets();
         currentNoOfTickets -= 1;
         ticket.setNoOfTickets(currentNoOfTickets);
     }

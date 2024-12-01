@@ -1,8 +1,9 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
-public class Vendor {
+public class Vendor implements Runnable{
     private String id;
     private int ticketsSold;
+    private TicketPool tickets;
 
     public Vendor(String id, int ticketsSold){
         this.id = id;
@@ -23,5 +24,13 @@ public class Vendor {
 
     public void setTicketsSold(int ticketsSold) {
         this.ticketsSold = ticketsSold;
+    }
+    public void addTickets(TicketPool){
+
+    }
+
+    @Override
+    public void run() {
+
     }
 }
