@@ -10,6 +10,6 @@ public class Customer {
     public void removeTicket(TicketPool ticket){
         int currentNoOfTickets = ticket.getMaximumNoOfTickets();
         currentNoOfTickets -= 1;
-        ticket.setNoOfTickets(currentNoOfTickets);
+        ticket.setMaximumNoOfTickets(currentNoOfTickets);
     }
 }
