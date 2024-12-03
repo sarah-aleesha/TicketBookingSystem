@@ -34,8 +34,10 @@ public class TicketPool {
                 // that is running until the wait is interrupted by notify() / notifyAll()
             } catch (InterruptedException e){
                 e.printStackTrace();// prints the exact location of the error that makes it easier to debug
-                throw new RuntimeException();
+                throw new RuntimeException(e.getMessage());
             }
         }
+        //once a spot or more is open in the ticket queue, tickets can be added until it becomes full again
+
     }
 }
