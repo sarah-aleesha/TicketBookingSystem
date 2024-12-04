@@ -2,7 +2,7 @@ package com.sarah.tickettingsystem.ticketBookingSystem;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class TicketPool implements Runnable{
+public class TicketPool{
     private int maximumNoOfTickets;
     private Queue<Ticket> ticketQueue;
 
@@ -58,10 +58,5 @@ public class TicketPool implements Runnable{
         System.out.println(Thread.currentThread().getName() + "purchased a " + ticket.getTicketId() + "ticket");
         System.out.println("Current size of the ticketpool : " + ticketQueue.size());
         return ticket;
-    }
-
-    @Override
-    public void run() {
-        //something
     }
 }

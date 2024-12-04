@@ -6,14 +6,14 @@ public class Ticket {
     private int ticketId;
     private String nameOEvent;
     private ticketType type;
-    private BigDecimal price;
+    private Double price;
     private String location;
     private String time;
     private String date;
     // all attributes are encapsulated by being made private to limit accessibility
 
 
-    public Ticket(int ticketId, ticketType type,String nameOEvent, BigDecimal price, String location, String time, String date) {
+    public Ticket(int ticketId, ticketType type,String nameOEvent, Double price, String location, String time, String date) {
         this.ticketId = ticketId;
         this.type = type;
         this.price = price;
@@ -48,11 +48,11 @@ public class Ticket {
         this.nameOEvent = nameOEvent;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
