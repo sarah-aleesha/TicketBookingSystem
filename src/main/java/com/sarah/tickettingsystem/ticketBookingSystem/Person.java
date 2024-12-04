@@ -10,7 +10,9 @@ public class Person{
         this.f_name = f_name;
         this.ticketPool = ticketPool;
     }
-    public Person(){};
+    public Person(TicketPool ticketPool){
+        this.ticketPool = ticketPool;
+    }
 
     public int getId() {
         return id;

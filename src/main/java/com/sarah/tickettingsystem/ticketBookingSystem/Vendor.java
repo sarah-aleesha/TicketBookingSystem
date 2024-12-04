@@ -8,6 +8,7 @@ public class Vendor extends Person implements Runnable{
         super(id, f_name, ticketPool);
     }
     public Vendor(TicketPool ticketPool,int totalTickets, int ticketReleaseRate){
+        super(ticketPool);
         super.setTicketPool(ticketPool);
         this.totalTickets = totalTickets;
         this.ticketReleaseRate = ticketReleaseRate;

@@ -4,14 +4,11 @@ public class Customer extends Person implements Runnable{
     private int ticketsBought;
     private int customerRetrievalRate;
 
-    public Customer(int id, String f_name, TicketPool ticketPool) {
-        super(id, f_name, ticketPool);
-    }
-
-    public Customer(int ticketsBought, int customerRetrievalRate) {
-        super();
+    public Customer(int ticketsBought, int customerRetrievalRate, TicketPool ticketPool) {
+        super(ticketPool);
         this.ticketsBought = ticketsBought;
         this.customerRetrievalRate = customerRetrievalRate;
+
     }
 
     @Override
