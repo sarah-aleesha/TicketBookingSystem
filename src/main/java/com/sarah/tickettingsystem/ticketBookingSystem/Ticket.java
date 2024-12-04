@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Ticket {
     private int ticketId;
-    private String nameOEvent;
+    private String nameOfEvent;
     private ticketType type;
     private Double price;
     private String location;
@@ -13,16 +13,17 @@ public class Ticket {
     // all attributes are encapsulated by being made private to limit accessibility
 
 
-    public Ticket(int ticketId, ticketType type,String nameOEvent, Double price, String location, String time, String date) {
+    public Ticket(int ticketId, ticketType type,String nameOfEvent, Double price, String location, String time, String date) {
         this.ticketId = ticketId;
         this.type = type;
+        this.nameOfEvent = nameOfEvent;
         this.price = price;
         this.location = location;
         this.time = time;
         this.date = date;
     }
 
-    //if an attribute is made private, it can only be accessed in other classes through its getter and setter
+    //if an attribute is made private, it can only be accessed in other classes through its getters and setters
 
     public ticketType getType() {
         return type;
@@ -40,12 +41,12 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
-    public String getNameOEvent() {
-        return nameOEvent;
+    public String getNameOfEvent() {
+        return nameOfEvent;
     }
 
-    public void setNameOEvent(String nameOEvent) {
-        this.nameOEvent = nameOEvent;
+    public void setNameOfEvent(String nameOfEvent) {
+        this.nameOfEvent = nameOfEvent;
     }
 
     public Double getPrice() {
@@ -83,12 +84,12 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" +
-                "ticketId=" + ticketId +
-                ", nameOEvent='" + nameOEvent + '\'' +
-                ", price=" + price +
-                ", location='" + location + '\'' +
-                ", time='" + time + '\'' +
-                ", date='" + date + '\'' +
+                "\nticketId=" + ticketId +
+                ", \nnameOEvent='" + nameOfEvent + '\'' +
+                ", \nprice=" + price +
+                ", \nlocation='" + location + '\'' +
+                ", \ntime='" + time + '\'' +
+                ", \ndate='" + date + '\'' +
                 '}';
     }
 }

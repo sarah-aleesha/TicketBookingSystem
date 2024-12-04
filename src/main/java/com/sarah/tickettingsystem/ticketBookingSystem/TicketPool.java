@@ -3,11 +3,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class TicketPool{
-    private int maximumNoOfTickets;
+    private int maximumNoOfTickets;//maximum possible tickets to be made available in the ticket pool
     private Queue<Ticket> ticketQueue;
 
 
-    public TicketPool(int maximumNoOfTickets, Ticket ticket ){
+    public TicketPool(int maximumNoOfTickets ){
         this.maximumNoOfTickets = maximumNoOfTickets;
         this.ticketQueue = new LinkedList<>();
     }

@@ -7,6 +7,10 @@ public class Vendor extends Person implements Runnable{
     public Vendor(int id, String f_name, TicketPool ticketPool) {
         super(id, f_name, ticketPool);
     }
+    public Vendor(int totalTickets, int ticketReleaseRate){
+        this.totalTickets = totalTickets;
+        this.ticketReleaseRate = ticketReleaseRate;
+    }
 
     public Vendor(int id, String f_name, TicketPool ticketPool, int ticketReleaseRate, int totalTickets) {
         super(id, f_name, ticketPool);
@@ -41,8 +45,9 @@ public class Vendor extends Person implements Runnable{
                     "08:00",
                     "2024-12-03");
             getTicketPool().addTicket(ticket);
+            System.out.println(getF_name()+ " ( " + Thread.currentThread().getName() + " ) released a Ticket: " + ticket.toString());
             try {
-                Thread.sleep(2000);// the thread that executes the code will sleep for 2 seconds
+                Thread.sleep(ticketReleaseRate * 1000);// the thread that executes the code will sleep for 2 seconds
             } catch (InterruptedException e) {
                 throw new RuntimeException(e.getMessage());
             }
