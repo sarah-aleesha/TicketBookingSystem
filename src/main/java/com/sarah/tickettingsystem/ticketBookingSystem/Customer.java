@@ -1,15 +1,15 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
-public class Customer {
-    private String name;
-    TicketPool ticket;
+public class Customer extends Person implements Runnable{
+    private int ticketsBought;
 
-    public Customer (String name){
-        this.name = name;
+    public Customer(int id, String f_name, TicketPool ticketPool) {
+        super(id, f_name, ticketPool);
     }
-    public void removeTicket(TicketPool ticket){
-        int currentNoOfTickets = ticket.getMaximumNoOfTickets();
-        currentNoOfTickets -= 1;
-        ticket.setMaximumNoOfTickets(currentNoOfTickets);
+
+
+    @Override
+    public void run() {
+        //something
     }
 }

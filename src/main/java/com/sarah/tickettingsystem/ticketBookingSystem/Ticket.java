@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class Ticket {
     private int ticketId;
     private String nameOEvent;
+    private ticketType type;
     private BigDecimal price;
     private String location;
     private String time;
@@ -12,16 +13,25 @@ public class Ticket {
     // all attributes are encapsulated by being made private to limit accessibility
 
 
-    public Ticket(int ticketId, String nameOEvent, BigDecimal price, String location, String time, String date) {
+    public Ticket(int ticketId, ticketType type,String nameOEvent, BigDecimal price, String location, String time, String date) {
         this.ticketId = ticketId;
-        this.nameOEvent = nameOEvent;
+        this.type = type;
         this.price = price;
         this.location = location;
         this.time = time;
         this.date = date;
     }
 
-    //if an attribute is made private, it can only be accessed in other classs through its getter and setter
+    //if an attribute is made private, it can only be accessed in other classes through its getter and setter
+
+    public ticketType getType() {
+        return type;
+    }
+
+    public void setType(ticketType type) {
+        this.type = type;
+    }
+
     public int getTicketId() {
         return ticketId;
     }

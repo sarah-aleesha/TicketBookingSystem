@@ -1,33 +1,30 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
-public class Vendor implements Runnable{
-    private String id;
-    private int ticketsSold;
-    private TicketPool tickets;
+public class Vendor extends Person implements Runnable{
+    private int totalTickets;//the amount of tickets wished to be sold by the vendor
+    private int ticketReleaseRate;//amount of time between addition of tickets to the ticket pool
 
-    public Vendor(String id, int ticketsSold){
-        this.id = id;
-        this.ticketsSold = ticketsSold;
+    public Vendor(int id, String f_name, TicketPool ticketPool){
+        super(id, f_name, ticketPool);
+
     }
 
-    public String getId() {
-        return id;
+    public int getTotalTickets() {
+        return totalTickets;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTotalTickets(int totalTickets) {
+        this.totalTickets = totalTickets;
     }
 
-    public int getTicketsSold() {
-        return ticketsSold;
+    public int getTicketReleaseRate() {
+        return ticketReleaseRate;
     }
 
-    public void setTicketsSold(int ticketsSold) {
-        this.ticketsSold = ticketsSold;
+    public void setTicketReleaseRate(int ticketReleaseRate) {
+        this.ticketReleaseRate = ticketReleaseRate;
     }
-    public void addTickets(TicketPool tickets){
-    }
-
+//this is the body of a thread
     @Override
     public void run() {
 
