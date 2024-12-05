@@ -1,4 +1,6 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
+import jakarta.servlet.ServletOutputStream;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main {
@@ -7,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);//this object enables us to receive user input
         int tempInput = 0;
-
+        //gathering the necessary information from the user and setting those values to the corresponding variables
+        //declared in various classes
         System.out.println("Welcome to the ticketing system!");
         System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Enter the Maximum ticket pool capacity(Enter a number more than 0) : ");
@@ -25,7 +28,14 @@ public class Main {
         System.out.println("Enter the number of tickets to be bought by the vendor(Enter a number more than 0) : ");
         tempInput =  getAValidNumber();
         Customer.setTicketsBought(tempInput);
-
+        System.out.println("starting the process...");
+        System.out.println("--------------------------------------------------------------------------------");
+        TicketPool ticketPool = new TicketPool(TicketPool.getMaximumNoOfTickets());
+        //for loop to create the required amount of threads for vendors
+        for (int i = 1 ; i <= Vendor.getNoOfTicketsToAdd() ; i++){
+            Vendor vendors = new Vendor(i, ticketPool, Vendor.getTicketReleaseRate(), Vendor.getNoOfTicketsToAdd());
+            Thread vendor = new Thread("vendor " + i);
+        }
     }
     static int getAValidNumber(){
         Scanner scanner = new Scanner(System.in);
