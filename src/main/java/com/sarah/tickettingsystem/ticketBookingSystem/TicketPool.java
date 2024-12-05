@@ -11,6 +11,9 @@ public class TicketPool{
         maximumNoOfTickets = maxNoOfTickets;
         ticketQueue = new LinkedList<>();
     }
+    public int getSizeOfPool(){
+        return ticketQueue.size();
+    }
  //This method is used to get the number of maximum tickets which can be stored in the ticket pool
 //takes no arguments
     // returns the maximum number of tickets
