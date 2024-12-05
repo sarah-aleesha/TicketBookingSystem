@@ -29,15 +29,26 @@ public class Customer extends Person{
 
     @Override
     public void run() {
-        for (int i = 0; i <= ticketsBought; i++) {
-            Ticket ticket = getTicketPool().buyTicket();
-            System.out.println(getId() + " purchased Ticket " + ticket.toString());
 
-            try{
+        synchronized (getTicketPool()) {
+            while(super.getTicketPool().getSizeOfPool() <= 0 ){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException(e);
+                }
+            }
+            notifyAll();
+            Ticket ticket = getTicketPool().buyTicket();
+            System.out.println(Thread.currentThread() + " purchased Ticket " + ticket.toString());
+
+            try {
                 Thread.sleep(customerRetrievalRate * 1000L);//time between each purchase
-            } catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e.getMessage());
             }
+
         }
     }
 

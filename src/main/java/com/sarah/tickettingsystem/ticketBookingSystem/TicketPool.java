@@ -35,7 +35,7 @@ public class TicketPool{
                 wait(); //this method stops the execution of the particular thread
                 // that is running until the wait is interrupted by notifyAll()
             } catch (InterruptedException e){
-                e.printStackTrace();// prints the exact location of the error that makes it easier to debug
+                Thread.currentThread().interrupt();
                 throw new RuntimeException(e.getMessage());
             }
         }
@@ -53,6 +53,7 @@ public class TicketPool{
             try {
                 wait();//the customer will have to wait if the queue is empty
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 throw new RuntimeException(e.getMessage());
             }
         }

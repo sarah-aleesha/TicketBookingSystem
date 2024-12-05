@@ -2,6 +2,7 @@ package com.sarah.tickettingsystem.ticketBookingSystem;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 public class Main {
     private static int input;
 
@@ -15,63 +16,66 @@ public class Main {
             System.out.println("--------------------------------------------------------------------------------");
             System.out.println("Enter the Maximum ticket pool capacity(Enter a number more than 0) : ");//message given to the user to get the maximum amount of tickets
             // that can be available in the ticket pool
-            tempInput = getAValidNumber();//gets a valid number using the getAValidNumber() method that is declared below the main method
+            tempInput = getAValidNumber(scanner);//gets a valid number using the getAValidNumber() method that is declared below the main method
             TicketPool.setMaximumNoOfTickets(tempInput);
-            System.out.println("Enter the number of tickets to be added by the vendor(Enter a number more than 0) : ");
-            tempInput = getAValidNumber();
-            Vendor.setNoOfTicketsToAdd(tempInput);
             System.out.println("Enter the rate of releasing tickets (Enter a number more than 0) : ");
-            tempInput = getAValidNumber();
+            tempInput = getAValidNumber(scanner);
             Vendor.setTicketReleaseRate(tempInput);
             //Customer parameters
             System.out.println("Enter the buying rate of the customer(Enter a number more than 0) : ");
-            tempInput = getAValidNumber();
+            tempInput = getAValidNumber(scanner);
             Customer.setCustomerRetrievalRate(tempInput);
-            System.out.println("Enter the number of tickets to be bought by the vendor(Enter a number more than 0) : ");
-            tempInput = getAValidNumber();
-            Customer.setTicketsBought(tempInput);
-            System.out.println("enter the number of customers");
-            int noOfCustomers = getAValidNumber();
+            System.out.println("Do you wish to save the prcess to a JSON file: ");
+            String tempChoice = yesOrNo(scanner);
+            Customer.setCustomerRetrievalRate(tempInput);
             //starting the process from here onwards
             System.out.println("starting the process...");
             System.out.println("--------------------------------------------------------------------------------");
 
             TicketPool ticketPool = new TicketPool(TicketPool.getMaximumNoOfTickets());
-            int totalTicketsCreated = 0;
             //for loop to create the required amount of threads for vendors
-            while (!wishToEnd()) {
-                totalTicketsCreated += 1;
-                Vendor singleVendor = new Vendor(totalTicketsCreated, ticketPool, Vendor.getTicketReleaseRate(), Vendor.getNoOfTicketsToAdd());
-                Thread vendor = new Thread(singleVendor, "single " + totalTicketsCreated);// creates a vendor named thread and the value of i
+            while (true) {
+                Vendor singleVendor = new Vendor(Vendor.getTicketCount(), ticketPool, Vendor.getTicketReleaseRate());
+                Thread vendor = new Thread(singleVendor, "vendor ");// creates a vendor named thread and the value of i
                 vendor.start();// calls the run method of the vendor class
-                Customer singleCustomer = new Customer( Customer.getTicketsBought(), Customer.getCustomerRetrievalRate(), ticketPool);
-                Thread customer = new Thread(singleCustomer, "customer " + totalTicketsCreated);
+                Customer singleCustomer = new Customer(Customer.getTicketsBought(), Customer.getCustomerRetrievalRate(), ticketPool);
+                Thread customer = new Thread(singleCustomer, "customer ");
                 customer.start();// calls the run method of the customer class
+                System.out.println("enter end if you wish to end");
+
+                if (wishToEnd(scanner)) {
+                    System.out.println("process Ended");
+                    System.out.println("--------------------------------------------------------------------------------");
+                    System.out.println("A total of " + Vendor.getTicketCount() + " tickets were created throughout the process.");
+                    System.out.println("--------------------------------------------------------------------------------");
+                    System.out.println("System closing...");
+                    break;
+                }
             }
-            if (wishToEnd()) {
-                System.out.println("process Ended");
-                System.out.println("--------------------------------------------------------------------------------");
-                System.out.println("A total of " + totalTicketsCreated + " tickets were created throughout the process.");
-                System.out.println("--------------------------------------------------------------------------------");
-                System.out.println("System closing...");
-                break;
-            }
+            scanner.close();
+            break;
         }
     }
 
-    static public boolean wishToEnd(){
-        Scanner input = new Scanner(System.in);
+    static String yesOrNo(Scanner scanner){
+        String choice = scanner.nextLine();
+        while(!(choice.trim().equalsIgnoreCase("yes")|| choice.trim().equalsIgnoreCase("no"))){
+            System.out.println("enter a valid choice (yes/no)");
+            choice = scanner.nextLine();
+        }
+        return choice.trim();
+    }
+
+    static public boolean wishToEnd(Scanner scanner){
         boolean wishesToEnd = false;
-        System.out.println("enter end if you wish to end");
-        String userChoice = input.next();
+        String userChoice = scanner.nextLine();
         if(userChoice.trim().equalsIgnoreCase("end")){
             wishesToEnd = true;
         }
         return wishesToEnd;
     }
 
-    static int getAValidNumber(){
-        Scanner scanner = new Scanner(System.in);
+    static int getAValidNumber(Scanner scanner){
         boolean isValid = false;
         int input = 0;
         do{
