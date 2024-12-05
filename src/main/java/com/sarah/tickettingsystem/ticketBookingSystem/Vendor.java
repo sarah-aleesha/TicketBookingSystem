@@ -1,11 +1,11 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
-public class Vendor extends Person implements Runnable{
+public class Vendor extends Person{
     private int totalTickets;//the amount of tickets wished to be sold by the vendor
     private int ticketReleaseRate;//amount of time between addition of tickets to the ticket pool
 
-    public Vendor(int id, String f_name, TicketPool ticketPool) {
-        super(id, f_name, ticketPool);
+    public Vendor(int id, TicketPool ticketPool) {
+        super(id, ticketPool);
     }
     public Vendor(TicketPool ticketPool,int totalTickets, int ticketReleaseRate){
         super(ticketPool);
@@ -15,7 +15,7 @@ public class Vendor extends Person implements Runnable{
     }
 
     public Vendor(int id, String f_name, TicketPool ticketPool, int ticketReleaseRate, int totalTickets) {
-        super(id, f_name, ticketPool);
+        super(id, ticketPool);
         this.ticketReleaseRate = ticketReleaseRate;
         this.totalTickets = totalTickets;
     }
@@ -40,14 +40,11 @@ public class Vendor extends Person implements Runnable{
     public void run() {
         for(int i = 1 ; i <= totalTickets ; i++){
             Ticket ticket = new Ticket(i,
-                    ticketType.Balcony,
                     "Movie",
                     3.50,
-                    "Scope Cinema",
-                    "08:00",
-                    "2024-12-03");
+                    "Scope Cinema");
             getTicketPool().addTicket(ticket);
-            System.out.println(getF_name()+ " ( " + Thread.currentThread().getName() + " ) released a Ticket: " + ticket.toString());
+            System.out.println(getId()+ " ( " + Thread.currentThread().getName() + " ) released a Ticket: " + ticket.toString());
             try {
                 Thread.sleep(ticketReleaseRate * 1000);// the thread that executes the code will sleep for 2 seconds
             } catch (InterruptedException e) {

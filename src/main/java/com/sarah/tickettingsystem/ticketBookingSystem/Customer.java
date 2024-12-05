@@ -1,6 +1,6 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
-public class Customer extends Person implements Runnable{
+public class Customer extends Person{
     private int ticketsBought;
     private int customerRetrievalRate;
 
@@ -15,7 +15,7 @@ public class Customer extends Person implements Runnable{
     public void run() {
         for (int i = 0; i <= ticketsBought; i++) {
             Ticket ticket = getTicketPool().buyTicket();
-            System.out.println(getF_name() + " purchased Ticket " + ticket.toString());
+            System.out.println(getId() + " purchased Ticket " + ticket.toString());
 
             try{
                 Thread.sleep(customerRetrievalRate * 1000);//time between each purchase

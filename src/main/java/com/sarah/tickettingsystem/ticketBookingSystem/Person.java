@@ -1,13 +1,11 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
-public class Person{
+public class Person implements Runnable{
     private int id;
-    private String f_name;
     private TicketPool ticketPool;
 
-    public Person(int id, String f_name, TicketPool ticketPool) {
+    public Person(int id, TicketPool ticketPool) {
         this.id = id;
-        this.f_name = f_name;
         this.ticketPool = ticketPool;
     }
     public Person(TicketPool ticketPool){
@@ -22,19 +20,16 @@ public class Person{
         this.id = id;
     }
 
-    public String getF_name() {
-        return f_name;
-    }
-
-    public void setF_name(String f_name) {
-        this.f_name = f_name;
-    }
-
     public TicketPool getTicketPool() {
         return ticketPool;
     }
 
     public void setTicketPool(TicketPool ticketPool) {
         this.ticketPool = ticketPool;
+    }
+
+    @Override
+    public void run(){
+        //main implementations are available in the run methods of the Customer and the Vendor
     }
 }
