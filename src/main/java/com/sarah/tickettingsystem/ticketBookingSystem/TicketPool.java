@@ -42,7 +42,7 @@ public class TicketPool{
         //once a spot or more is open in the ticket queue, tickets can be added until it becomes full again
         ticketQueue.add(ticket);
         notifyAll();
-        System.out.println(Thread.currentThread().getName() + "added ticket " + ticket.getTicketId() + " to the pool Current size of the ticket pool : " + ticketQueue.size());
+        System.out.println(Thread.currentThread().getName() + "added ticket " + ticket.getTicketId() + " to the pool. \nCurrent size of the ticket pool : " + ticketQueue.size());
         System.out.println();
 
     }
@@ -59,7 +59,7 @@ public class TicketPool{
         }
         Ticket ticket = ticketQueue.poll();//this method will retrieve the head ticket of the queue
         notifyAll();//notifies the waiting threads
-        System.out.println(Thread.currentThread().getName() + "purchased a " + ticket.getTicketId() + "ticket Current size of the ticketpool : " + ticketQueue.size());
+        System.out.println(Thread.currentThread().getName() + "purchased ticket NO. : " + ticket.getTicketId() + ". Current size of the ticketpool : " + ticketQueue.size());
         System.out.println();
         return ticket;
     }

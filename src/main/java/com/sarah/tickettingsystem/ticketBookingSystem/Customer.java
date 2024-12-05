@@ -33,15 +33,15 @@ public class Customer extends Person{
         synchronized (getTicketPool()) {
             while(super.getTicketPool().getSizeOfPool() <= 0 ){
                 try {
-                    wait();
+                    getTicketPool().wait();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException(e);
                 }
             }
-            notifyAll();
+            getTicketPool().notifyAll();
             Ticket ticket = getTicketPool().buyTicket();
-            System.out.println(Thread.currentThread() + " purchased Ticket " + ticket.toString());
+            System.out.println(Thread.currentThread().getName() + " purchased Ticket " + ticket.toString());
 
             try {
                 Thread.sleep(customerRetrievalRate * 1000L);//time between each purchase

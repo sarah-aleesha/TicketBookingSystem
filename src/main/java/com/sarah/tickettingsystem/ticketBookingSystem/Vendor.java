@@ -31,13 +31,13 @@ public class Vendor extends Person{
         synchronized (getTicketPool()) {
             while (super.getTicketPool().getSizeOfPool() > TicketPool.getMaximumNoOfTickets()) {
                 try {
-                    wait();
+                    getTicketPool().wait();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new RuntimeException(e);
                 }
             }
-            notifyAll();
+            getTicketPool().notifyAll();
             Ticket ticket = new Ticket(getTicketCount(),
                     "Movie",
                     3.50,
