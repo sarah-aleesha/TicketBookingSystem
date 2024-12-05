@@ -3,7 +3,6 @@ package com.sarah.tickettingsystem.ticketBookingSystem;
 public class Ticket {
     private int ticketId;
     private String nameOfEvent;
-
     private Double price;
     private String location;
 

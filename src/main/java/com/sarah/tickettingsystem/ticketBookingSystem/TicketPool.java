@@ -3,25 +3,25 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class TicketPool{
-    private int maximumNoOfTickets;//maximum possible tickets to be made available in the ticket pool
-    private Queue<Ticket> ticketQueue;
+    private static int maximumNoOfTickets;//maximum possible tickets to be made available in the ticket pool
+    private static Queue<Ticket> ticketQueue;
 
 
-    public TicketPool(int maximumNoOfTickets ){
-        this.maximumNoOfTickets = maximumNoOfTickets;
-        this.ticketQueue = new LinkedList<>();
+    public TicketPool(int maxNoOfTickets){
+        maximumNoOfTickets = maxNoOfTickets;
+        ticketQueue = new LinkedList<>();
     }
  //This method is used to get the number of maximum tickets which can be stored in the ticket pool
 //takes no arguments
     // returns the maximum number of tickets
-    public int getMaximumNoOfTickets() {
+    public static int getMaximumNoOfTickets() {
         return maximumNoOfTickets;
     }
 //This method is used to set the number of maximum tickets which can be stored in the ticket pool
 // takes the maximum capacity of tickets of type integer
 // returns void
-    public void setMaximumNoOfTickets(int maximumNoOfTickets) {
-        this.maximumNoOfTickets = maximumNoOfTickets;
+    public static void setMaximumNoOfTickets(int maxNoOfTickets) {
+        maximumNoOfTickets = maxNoOfTickets;
     }
 //This method is used to add tickets to the queue which is done by the vendor
 // takes a ticket of type Ticket as its argument
@@ -39,8 +39,8 @@ public class TicketPool{
         //once a spot or more is open in the ticket queue, tickets can be added until it becomes full again
         ticketQueue.add(ticket);
         notifyAll();
-        System.out.println(Thread.currentThread().getName() + "added a " + ticket.getType() +" ticket to the pool");
-        System.out.println("Current size of the ticketpool : " + ticketQueue.size());
+        System.out.println(Thread.currentThread().getName() + "added ticket " + ticket.getTicketId() + " to the pool Current size of the ticket pool : " + ticketQueue.size());
+        System.out.println();
 
     }
 // the customer will call this method to purchase a ticket if the ticket pool is not full
@@ -55,8 +55,8 @@ public class TicketPool{
         }
         Ticket ticket = ticketQueue.poll();//this method will retrieve the head ticket of the queue
         notifyAll();//notifies the waiting threads
-        System.out.println(Thread.currentThread().getName() + "purchased a " + ticket.getTicketId() + "ticket");
-        System.out.println("Current size of the ticketpool : " + ticketQueue.size());
+        System.out.println(Thread.currentThread().getName() + "purchased a " + ticket.getTicketId() + "ticket Current size of the ticketpool : " + ticketQueue.size());
+        System.out.println();
         return ticket;
     }
 }

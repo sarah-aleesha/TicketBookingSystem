@@ -1,44 +1,36 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
 public class Vendor extends Person{
-    private int totalTickets;//the amount of tickets wished to be sold by the vendor
-    private int ticketReleaseRate;//amount of time between addition of tickets to the ticket pool
+    private static int noOfTicketsToAdd;//the amount of tickets wished to be sold by the vendor
+    private static int ticketReleaseRate;//amount of time between addition of tickets to the ticket pool
 
-    public Vendor(int id, TicketPool ticketPool) {
+
+    public Vendor(int id, TicketPool ticketPool, int ticketReleaseRate, int totalTickets) {
         super(id, ticketPool);
-    }
-    public Vendor(TicketPool ticketPool,int totalTickets, int ticketReleaseRate){
-        super(ticketPool);
-        super.setTicketPool(ticketPool);
-        this.totalTickets = totalTickets;
-        this.ticketReleaseRate = ticketReleaseRate;
+        Vendor.ticketReleaseRate = ticketReleaseRate;
+        noOfTicketsToAdd = totalTickets;
     }
 
-    public Vendor(int id, String f_name, TicketPool ticketPool, int ticketReleaseRate, int totalTickets) {
-        super(id, ticketPool);
-        this.ticketReleaseRate = ticketReleaseRate;
-        this.totalTickets = totalTickets;
+    public static int getNoOfTicketsToAdd() {
+        return noOfTicketsToAdd;
     }
 
-    public int getTotalTickets() {
-        return totalTickets;
+    public static void setNoOfTicketsToAdd(int noOfTicketsToAdd) {
+        Vendor.noOfTicketsToAdd = noOfTicketsToAdd;
     }
 
-    public void setTotalTickets(int totalTickets) {
-        this.totalTickets = totalTickets;
-    }
-
-    public int getTicketReleaseRate() {
+    public static int getTicketReleaseRate() {
         return ticketReleaseRate;
     }
 
-    public void setTicketReleaseRate(int ticketReleaseRate) {
-        this.ticketReleaseRate = ticketReleaseRate;
+    public static void setTicketReleaseRate(int ticketReleaseRate) {
+        Vendor.ticketReleaseRate = ticketReleaseRate;
     }
-//this is the body of a thread
+
+    //this is the body of a Vendor thread
     @Override
     public void run() {
-        for(int i = 1 ; i <= totalTickets ; i++){
+        for(int i = 1 ; i <= noOfTicketsToAdd ; i++){
             Ticket ticket = new Ticket(i,
                     "Movie",
                     3.50,
@@ -46,7 +38,7 @@ public class Vendor extends Person{
             getTicketPool().addTicket(ticket);
             System.out.println(getId()+ " ( " + Thread.currentThread().getName() + " ) released a Ticket: " + ticket.toString());
             try {
-                Thread.sleep(ticketReleaseRate * 1000);// the thread that executes the code will sleep for 2 seconds
+                Thread.sleep(ticketReleaseRate * 1000L);// the thread that executes the code will sleep for 2 seconds
             } catch (InterruptedException e) {
                 throw new RuntimeException(e.getMessage());
             }

@@ -1,14 +1,30 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
 
 public class Customer extends Person{
-    private int ticketsBought;
-    private int customerRetrievalRate;
+    private static int ticketsBought;
+    private static int customerRetrievalRate;
 
     public Customer(int ticketsBought, int customerRetrievalRate, TicketPool ticketPool) {
         super(ticketPool);
-        this.ticketsBought = ticketsBought;
-        this.customerRetrievalRate = customerRetrievalRate;
+        Customer.ticketsBought = ticketsBought;
+        Customer.customerRetrievalRate = customerRetrievalRate;
 
+    }
+
+    public static int getTicketsBought() {
+        return ticketsBought;
+    }
+
+    public static void setTicketsBought(int ticketsBought) {
+        Customer.ticketsBought = ticketsBought;
+    }
+
+    public static int getCustomerRetrievalRate() {
+        return customerRetrievalRate;
+    }
+
+    public static void setCustomerRetrievalRate(int customerRetrievalRate) {
+        Customer.customerRetrievalRate = customerRetrievalRate;
     }
 
     @Override
@@ -18,10 +34,11 @@ public class Customer extends Person{
             System.out.println(getId() + " purchased Ticket " + ticket.toString());
 
             try{
-                Thread.sleep(customerRetrievalRate * 1000);//time between each purchase
+                Thread.sleep(customerRetrievalRate * 1000L);//time between each purchase
             } catch(InterruptedException e){
                 throw new RuntimeException(e.getMessage());
             }
         }
     }
+
 }
