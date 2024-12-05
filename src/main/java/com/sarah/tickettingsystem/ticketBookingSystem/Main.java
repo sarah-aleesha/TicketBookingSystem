@@ -1,19 +1,15 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        TicketPool ticketPool = new TicketPool(5);
-        for (int i = 1; i <= ticketPool.getMaximumNoOfTickets() ; i++) {
-            Vendor vendor = new Vendor(ticketPool, ticketPool.getMaximumNoOfTickets(), 3);
-            Thread seller = new Thread(vendor,"vendor: " + i);
-            seller.start();//this invokes the run method in the Vendor class
-
-        }
-
-        for (int i = 1; i <= ticketPool.getMaximumNoOfTickets() ; i++) {
-            Customer customer = new Customer(3, 3, ticketPool);
-            Thread buyer = new Thread(customer,"customer: " + i);
-            buyer.start();//this invokes the run method in the Customer class
+        Scanner scanner = new Scanner(System.in);//this object enables us to receive user input
+        while(true){
+            System.out.println("Welcome to the ticketing system!");
+            System.out.println("Please choose a number joining each option(1/2/3)");
+            System.out.println("--------------------------------------------------------------------------------");
+            System.out.println("1 - Release a ticket\n" +
+                                "2 - Purchase a ticket\n " +
+                                "3 - save information");
         }
 
 

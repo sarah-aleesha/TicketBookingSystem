@@ -11,8 +11,8 @@ public class TicketController {
     private final ConcurrentLinkedQueue<TicketPool> ticketPools = new ConcurrentLinkedQueue<>();
 
     @RequestMapping("/release")
-    public String releaseTicket(@RequestParam TicketPool ticket){
+    public String releaseTicket(@RequestBody TicketPool ticket){
         ticketPools.add(ticket);
-        return "ticket released: " + ticket;
+        return "tickets released: " + ticket;
     }
 }
