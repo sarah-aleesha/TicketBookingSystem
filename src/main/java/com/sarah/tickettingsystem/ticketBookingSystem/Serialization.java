@@ -1,8 +1,6 @@
 package com.sarah.tickettingsystem.ticketBookingSystem;
-import java.io.BufferedWriter;
-import java.io.File;
+import java.io.*;
 import java.io.FileWriter;
-import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -12,8 +10,7 @@ public class Serialization {
     public static void saveDataToJson(TicketPool ticketPool, Customer customer, Vendor vendor) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();// creates an instance of GSON
         File file = new File(CONFIG_FILE);
-        BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(file, true));//this wraps around a filewriter object
-                                                                                                // and enables appending using "true" as the second argument
+        Configuration configuration = new Configuration(TicketPool.getMaximumNoOfTickets(),Vendor.getTicketReleaseRate(), Customer.getCustomerRetrievalRate(), Vendor.getTicketCount());
         if(!file.exists()) {
             try {
                 file.createNewFile();
@@ -22,17 +19,15 @@ public class Serialization {
                 return;
             }
         }
-        bufferedwriter.write("Maximum number of tickets allowed in the ticket pool\n" + TicketPool.getMaximumNoOfTickets());
-        bufferedwriter.newLine();//adds a new line after each log
-        //similarly for the rest of the required parameters...
-        bufferedwriter.write("Ticket release rate of the Vendor\n" + Vendor.getTicketReleaseRate());
-        bufferedwriter.newLine();//adds a new line after each log
+        try{
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true));
+            String toJson = gson.toJson(configuration);
+            bufferedWriter.write(toJson);
+            System.out.println("data has finaally been added to the user ine ata time");
+        } catch(IOException e){
+            System.out.println("an error occurred while saving the data to a json fail");
+        }
 
-        bufferedwriter.write("Customer retrieval rate\n" + Customer.getCustomerRetrievalRate());
-        bufferedwriter.newLine();//adds a new line after each log
-        //after completing operations using the BufferedWriter, it is essential to close the object to prevent leaks;
-
-        bufferedwriter.close();
 
     }
 }

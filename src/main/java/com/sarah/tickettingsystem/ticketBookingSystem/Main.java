@@ -30,7 +30,7 @@ public class Main {
         System.out.println("Do you wish to save the process to a JSON file (yes/no) ? ");
         String tempChoice = yesOrNo(scanner);
         if (tempChoice.equalsIgnoreCase("yes")){
-            //IMPLEMENT FILE HANDLING
+            Serialization.saveDataToJson();
         }
 
         //the user gets to decide if the data should be stored in the json file or not

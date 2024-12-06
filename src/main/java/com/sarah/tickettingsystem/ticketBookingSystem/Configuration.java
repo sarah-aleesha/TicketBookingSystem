@@ -6,10 +6,11 @@ public class Configuration {
     private final int ticketReleaseRate;
     private final int customerRetievalRate;// the keyword final makes the variable a constant. therefore the value cannot be altered by anyone (ti maintain data integrity)
 
-    public Configuration(int maximumTicketCapacity, int ticketReleaseRate, int customerRetievalRate) {
+    public Configuration(int maximumTicketCapacity, int ticketReleaseRate, int customerRetievalRate, int totalTicketsCreated) {
         this.maximumTicketCapacity = maximumTicketCapacity;
         this.ticketReleaseRate = ticketReleaseRate;
         this.customerRetievalRate = customerRetievalRate;
+        this.totalTicketsCreated = totalTicketsCreated;
     }
 
     public int getTotalTicketsCreated() {
