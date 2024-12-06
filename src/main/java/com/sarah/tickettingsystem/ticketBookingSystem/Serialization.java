@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Serialization {
+
+    private static final String CONFIG_FILE = "config.json";
     public static void saveDataToJson(TicketPool ticketPool, Customer customer, Vendor vendor) throws IOException {
-        Gson gson = new Gson();
-        File file = new File("data.json");
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();// creates an instance of GSON
+        File file = new File(CONFIG_FILE);
         BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(file, true));//this wraps around a filewriter object
                                                                                                 // and enables appending using "true" as the second argument
         if(!file.exists()) {

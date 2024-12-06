@@ -16,17 +16,23 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Enter the Maximum ticket pool capacity(Enter a number more than 0) : ");//message given to the user to get the maximum amount of tickets
         // that can be available in the ticket pool
+
         tempInput = getAValidNumber(scanner);//gets a valid number using the getAValidNumber() method that is declared below the main method
         TicketPool.setMaximumNoOfTickets(tempInput);
         System.out.println("Enter the rate of releasing tickets (Enter a number more than 0) : ");
         tempInput = getAValidNumber(scanner);
         Vendor.setTicketReleaseRate(tempInput);
         //Customer parameters
+
         System.out.println("Enter the buying rate of the customer(Enter a number more than 0) : ");
         tempInput = getAValidNumber(scanner);
         Customer.setCustomerRetrievalRate(tempInput);
         System.out.println("Do you wish to save the process to a JSON file (yes/no) ? ");
         String tempChoice = yesOrNo(scanner);
+        if (tempChoice.equalsIgnoreCase("yes")){
+            //IMPLEMENT FILE HANDLING
+        }
+
         //the user gets to decide if the data should be stored in the json file or not
         System.out.println("enter 'start' to start the system");
         tempChoice = scanner.nextLine();
