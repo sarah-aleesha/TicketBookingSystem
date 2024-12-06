@@ -16,13 +16,13 @@ public class Serialization {
                 return;
             }
         }
-        bufferedwriter.write("Ticket Pool details\n" + ticketPool.toString());
+        bufferedwriter.write("Maximum number of tickets allowed in the ticket pool\n" + TicketPool.getMaximumNoOfTickets());
         bufferedwriter.newLine();//adds a new line after each log
-        //similarly for the rest of the classes...
-        bufferedwriter.write("Vendor details\n" + vendor.toString());
+        //similarly for the rest of the required parameters...
+        bufferedwriter.write("Ticket release rate of the Vendor\n" + Vendor.getTicketReleaseRate());
         bufferedwriter.newLine();//adds a new line after each log
 
-        bufferedwriter.write("Customer details\n" + customer.toString());
+        bufferedwriter.write("Customer retrieval rate\n" + Customer.getCustomerRetrievalRate());
         bufferedwriter.newLine();//adds a new line after each log
         //after completing operations using the BufferedWriter, it is essential to close the object to prevent leaks;
 
