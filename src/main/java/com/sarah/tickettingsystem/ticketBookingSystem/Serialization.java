@@ -3,8 +3,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import com.google.gson.Gson;
+
 public class Serialization {
     public static void saveDataToJson(TicketPool ticketPool, Customer customer, Vendor vendor) throws IOException {
+        Gson gson = new Gson();
         File file = new File("data.json");
         BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(file, true));//this wraps around a filewriter object
                                                                                                 // and enables appending using "true" as the second argument
