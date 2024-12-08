@@ -1,3 +1,4 @@
+/*the following predefined packages are imported to use their methods*/
 package com.sarah.tickettingsystem.ticketBookingSystem;
 import java.io.*;
 import java.io.FileWriter;
