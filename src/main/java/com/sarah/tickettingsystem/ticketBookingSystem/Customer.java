@@ -27,6 +27,7 @@ public class Customer extends Person{
         Customer.customerRetrievalRate = customerRetrievalRate;
     }
 
+    //this method will be called when the start method is called in the Main method of the Main class
     @Override
     public void run() {
 
@@ -42,6 +43,7 @@ public class Customer extends Person{
             getTicketPool().notifyAll();
             Ticket ticket = getTicketPool().buyTicket();
             System.out.println(Thread.currentThread().getName() + " purchased Ticket " + ticket.toString());
+            System.out.println("Current size of the ticket pool : " + getTicketPool().getSizeOfPool());
 
             try {
                 Thread.sleep(customerRetrievalRate * 1000L);//time between each purchase
