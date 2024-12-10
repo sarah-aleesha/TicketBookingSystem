@@ -28,14 +28,11 @@ public class Main {
         tempInput = getAValidNumber(scanner);
         Customer.setCustomerRetrievalRate(tempInput);
         System.out.println("Do you wish to save the process to a JSON file (yes/no) ? ");
-        String tempChoice = yesOrNo(scanner);
-        if (tempChoice.equalsIgnoreCase("yes")){
-            Serialization.saveDataToJson();
-        }
-
+        String saveData = yesOrNo(scanner);
         //the user gets to decide if the data should be stored in the json file or not
+
         System.out.println("enter 'start' to start the system");
-        tempChoice = scanner.nextLine();
+        String tempChoice = scanner.nextLine();
         while(!(tempChoice.trim().equalsIgnoreCase("start"))){
             System.out.println("invalid input! enter 'start' to start the system");
             tempChoice = scanner.nextLine();
@@ -55,7 +52,9 @@ public class Main {
             Thread customer = new Thread(singleCustomer, "customer ");
             customer.start();// calls the run method of the customer class
             System.out.println("enter end if you wish to end");
-
+            if (saveData.equalsIgnoreCase("yes")){
+                Serialization.saveDataToJson();
+            }
             if (wishToEnd(scanner)) {
                 System.out.println("process Ended");
                 System.out.println("--------------------------------------------------------------------------------");
