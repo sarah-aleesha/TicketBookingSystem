@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem;
+package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

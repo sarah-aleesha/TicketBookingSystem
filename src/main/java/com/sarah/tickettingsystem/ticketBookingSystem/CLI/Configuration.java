@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem;
+package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
 
 public class Configuration {
     private int totalTicketsCreated;

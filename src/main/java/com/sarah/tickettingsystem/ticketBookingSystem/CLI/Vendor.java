@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem;
+package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
 
 public class Vendor extends Person{
     private static int ticketReleaseRate;

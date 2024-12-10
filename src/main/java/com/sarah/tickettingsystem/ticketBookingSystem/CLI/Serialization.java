@@ -1,5 +1,5 @@
 /*the following predefined packages are imported to use their methods*/
-package com.sarah.tickettingsystem.ticketBookingSystem;
+package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
 import java.io.*;
 import java.io.FileWriter;
 import com.google.gson.Gson;
