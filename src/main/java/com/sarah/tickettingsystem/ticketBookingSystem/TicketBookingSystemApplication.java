@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
+package com.sarah.tickettingsystem.ticketBookingSystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

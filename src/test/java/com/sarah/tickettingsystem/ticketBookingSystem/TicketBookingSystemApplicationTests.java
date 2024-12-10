@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
+package com.sarah.tickettingsystem.ticketBookingSystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

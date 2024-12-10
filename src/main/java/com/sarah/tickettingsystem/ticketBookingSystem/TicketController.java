@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem.CLI;
+package com.sarah.tickettingsystem.ticketBookingSystem;
 
 //* represents all the annotations. * is used so that each annotation does not need to be explicitly imported
 import org.springframework.web.bind.annotation.*;

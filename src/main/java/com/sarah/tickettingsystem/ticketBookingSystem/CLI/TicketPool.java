@@ -14,19 +14,19 @@ public class TicketPool{
     public int getSizeOfPool(){
         return ticketQueue.size();
     }
- //This method is used to get the number of maximum tickets which can be stored in the ticket pool
+    //This method is used to get the number of maximum tickets which can be stored in the ticket pool
 //takes no arguments
     // returns the maximum number of tickets
     public static int getMaximumNoOfTickets() {
         return maximumNoOfTickets;
     }
-//This method is used to set the number of maximum tickets which can be stored in the ticket pool
+    //This method is used to set the number of maximum tickets which can be stored in the ticket pool
 // takes the maximum capacity of tickets of type integer
 // returns void
     public static void setMaximumNoOfTickets(int maxNoOfTickets) {
         maximumNoOfTickets = maxNoOfTickets;
     }
-//This method is used to add tickets to the queue which is done by the vendor
+    //This method is used to add tickets to the queue which is done by the vendor
 // takes a ticket of type Ticket as its argument
 // returns void
     public synchronized void addTicket(Ticket ticket){
@@ -46,7 +46,7 @@ public class TicketPool{
         System.out.println();
 
     }
-// the customer will call this method to purchase a ticket if the ticket pool is not full
+    // the customer will call this method to purchase a ticket if the ticket pool is not full
     //this method takes no arguments and returns a ticket
     public synchronized Ticket buyTicket() {
         while(ticketQueue.isEmpty()){
