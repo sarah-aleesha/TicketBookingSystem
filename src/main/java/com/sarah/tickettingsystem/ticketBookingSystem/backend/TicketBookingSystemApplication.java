@@ -1,4 +1,4 @@
-package com.sarah.tickettingsystem.ticketBookingSystem.Backend;
+package com.sarah.tickettingsystem.ticketBookingSystem.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
