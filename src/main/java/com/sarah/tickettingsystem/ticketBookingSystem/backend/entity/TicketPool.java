@@ -16,16 +16,17 @@ public class TicketPool {
     @Transient
     private final ConcurrentLinkedQueue<Ticket> ticketQueue = new ConcurrentLinkedQueue<>();
     @Column(name = "number_of_tickets_released", nullable = false)
-    private AtomicInteger ticketsReleased;
+    private AtomicInteger ticketsReleased = new AtomicInteger(0);
     /*even though int is also atomic, Atomic Integer is safer to use compared to int since it contains methods that are not available in int
     is i a better option in multi-threading environments*/
     @Column(name = "number_of_tickets_purchased", nullable = false)
-    private AtomicInteger ticketsPurchased;
-//Methods begin here onwards
+    private AtomicInteger ticketsPurchased = new AtomicInteger(0);
+
+    //Methods begin here onwards
     public void configureTicketPool(int maxNoTickets){
         maximumNoOfTickets = maxNoTickets;
     }
-    public boolean addedTicket(Ticket ticket){
+    public synchronized boolean addedTicket(Ticket ticket){
         if(ticketQueue.size()< maximumNoOfTickets){
             ticketQueue.offer(ticket);
             ticketsReleased.incrementAndGet();//method in the class AtomicInteger

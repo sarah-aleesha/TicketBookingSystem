@@ -1,5 +1,6 @@
 package com.sarah.tickettingsystem.ticketBookingSystem.backend.service;
 
+import com.sarah.tickettingsystem.ticketBookingSystem.backend.entity.Ticket;
 import com.sarah.tickettingsystem.ticketBookingSystem.backend.entity.TicketPool;
 import com.sarah.tickettingsystem.ticketBookingSystem.backend.repository.TicketPoolRepository;
 import com.sarah.tickettingsystem.ticketBookingSystem.backend.repository.TicketRepository;
@@ -16,7 +17,9 @@ public class TicketPoolService {
 /*this method add a ticket to the pool
 * it takes the ticket pool id of type int and a ticket of type Ticket as its arguments
 * finally it returns a boolean to specify if a ticket has been added*/
-    public void addedTicketToPool(int tickPoolId){
-        TicketPool ticketPool ;
+    public void addedTicketToPool(Integer tickPoolId, Ticket ticket){
+        TicketPool ticketPool;
     }
+
+
 }
