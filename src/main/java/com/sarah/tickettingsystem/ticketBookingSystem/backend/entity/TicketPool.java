@@ -21,7 +21,7 @@ public class TicketPool {
     is i a better option in multi-threading environments*/
     @Column(name = "number_of_tickets_purchased", nullable = false)
     private AtomicInteger ticketsPurchased;
-
+//Methods begin here onwards
     public void configureTicketPool(int maxNoTickets){
         maximumNoOfTickets = maxNoTickets;
     }

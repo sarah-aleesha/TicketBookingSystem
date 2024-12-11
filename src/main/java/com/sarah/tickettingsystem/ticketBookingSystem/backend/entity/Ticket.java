@@ -2,7 +2,7 @@ package com.sarah.tickettingsystem.ticketBookingSystem.backend.entity;
 
 
 import jakarta.persistence.*;//imports all the features included in this package
-import org.springframework.stereotype.Component;
+
 
 @Entity
 @Table(name = "Ticket")
@@ -14,11 +14,21 @@ public class Ticket {
     private String nameOfEvent;
     @Column(name = "price")
     private Double price;
+    /*
+    * many instances of tickets will be linked to one instance of the ticket pool
+    * */
+    @ManyToOne
+    @JoinColumn(name = "ticket_pool_id")
+    TicketPool ticketPool;
     //empty constructor
     public Ticket(){}
     public Ticket(String nameOfEvent,Double price){
         this.nameOfEvent = nameOfEvent;
         this.price = price;
+    }
+
+    public TicketPool getTicketPool() {
+        return ticketPool;
     }
 
     public Double getPrice() {
