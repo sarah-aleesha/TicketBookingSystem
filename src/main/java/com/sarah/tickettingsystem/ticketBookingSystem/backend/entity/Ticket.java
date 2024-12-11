@@ -1,17 +1,18 @@
 package com.sarah.tickettingsystem.ticketBookingSystem.backend.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;//imports all the features included in this package
+import org.springframework.stereotype.Component;
 
 @Entity
+@Table(name = "Ticket")
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name_of_event")
     private String nameOfEvent;
+    @Column(name = "price")
     private Double price;
     //empty constructor
     public Ticket(){}
