@@ -2,19 +2,40 @@ package com.sarah.tickettingsystem.ticketBookingSystem.backend.entity;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import jakarta.persistence.Entity;
+import org.springframework.stereotype.Component;
 
 
-@Entity
+@Component
 public class TicketPool {
-    private static int maximumNoOfTickets;
-    private static final ConcurrentLinkedQueue<Ticket> ticketQueue = new ConcurrentLinkedQueue<>();
+    private int maximumNoOfTickets;
+    private final ConcurrentLinkedQueue<Ticket> ticketQueue = new ConcurrentLinkedQueue<>();
+    private int ticketsReleased;
+    private int ticketsPurchased;
 
-    public static void addTicket(Ticket ticket){
-        boolean offer = ticketQueue.offer(ticket);
-        if(offer){
-            System.out.println("added successfully");
-        } else {
-            System.out.println("could not add ticket to the ticket pool");
+    public void configureTicketPool(int maxNoTickets){
+        maximumNoOfTickets = maxNoTickets;
+    }
+    public boolean addedTicket(Ticket ticket){
+        if(ticketQueue.size()< maximumNoOfTickets){
+            ticketQueue.offer(ticket);
+            ticketsReleased += 1;
+            return true;
         }
+        return false;
+    }
+    public Ticket boughtTicket(){
+        Ticket ticket = ticketQueue.poll();
+        if(ticket != null){
+            ticketsPurchased += 1;
+        }
+        return ticket;
+    }
+/*the number of tickets bought, only have readability access, maintaining integrity*/
+    public int getTicketsReleased() {
+        return ticketsReleased;
+    }
+
+    public int getTicketsPurchased() {
+        return ticketsPurchased;
     }
 }
