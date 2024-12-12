@@ -18,13 +18,18 @@ public class Ticket {
     * many instances of tickets will be linked to one instance of the ticket pool
     * */
     @ManyToOne
-    @JoinColumn(name = "ticket_pool_id")
+    @JoinColumn(name = "ticket_pool_id", nullable = false)
     TicketPool ticketPool;
     //empty constructor
     public Ticket(){}
     public Ticket(String nameOfEvent,Double price){
         this.nameOfEvent = nameOfEvent;
         this.price = price;
+    }
+    public Ticket(String nameOfEvent, Double price, TicketPool ticketPool) {
+        this.nameOfEvent = nameOfEvent;
+        this.price = price;
+        this.ticketPool = ticketPool;
     }
 
     public TicketPool getTicketPool() {

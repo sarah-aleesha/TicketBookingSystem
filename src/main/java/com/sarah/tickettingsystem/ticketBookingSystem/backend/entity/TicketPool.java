@@ -1,47 +1,81 @@
 package com.sarah.tickettingsystem.ticketBookingSystem.backend.entity;
 
+import jakarta.persistence.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jakarta.persistence.*;
-
 @Entity
-@Table(name = "parameters")//specifies the name of the table
+@Table(name = "TicketPool")
 public class TicketPool {
-    @Id// to specify the primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatically generated the Primary Key
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "maximum_number_of_tickets", nullable = false)
     private int maximumNoOfTickets;
+
     @Transient
     private final ConcurrentLinkedQueue<Ticket> ticketQueue = new ConcurrentLinkedQueue<>();
+
     @Column(name = "number_of_tickets_released", nullable = false)
     private AtomicInteger ticketsReleased = new AtomicInteger(0);
-    /*even though int is also atomic, Atomic Integer is safer to use compared to int since it contains methods that are not available in int
-    is i a better option in multi-threading environments*/
+
     @Column(name = "number_of_tickets_purchased", nullable = false)
     private AtomicInteger ticketsPurchased = new AtomicInteger(0);
 
-    //Methods begin here onwards
-    public void configureTicketPool(int maxNoTickets){
-        maximumNoOfTickets = maxNoTickets;
+    // Constructors
+
+    public TicketPool() {
+        // Default constructor required by JPA
     }
-    public synchronized boolean addedTicket(Ticket ticket){
-        if(ticketQueue.size()< maximumNoOfTickets){
-            ticketQueue.offer(ticket);
-            ticketsReleased.incrementAndGet();//method in the class AtomicInteger
-            return true;
+
+    public TicketPool(int maxNoTickets) {
+        if (maxNoTickets <= 0) {
+            throw new IllegalArgumentException("Maximum number of tickets must be greater than zero.");
         }
-        return false;
+        this.maximumNoOfTickets = maxNoTickets;
     }
-    public Ticket boughtTicket(){
+
+    // Methods to add the tickets
+
+    public synchronized void addTicket(Ticket ticket) {
+        while (ticketQueue.size() >= maximumNoOfTickets) {
+            try {
+                System.out.println("Ticket pool is full. Waiting for space...");
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restore interrupted status
+                throw new IllegalStateException("Thread was interrupted while adding a ticket.", e);
+            }
+        }
+        ticketQueue.offer(ticket);
+        ticketsReleased.incrementAndGet();
+        System.out.println("Ticket added: " + ticket);
+        notifyAll(); // Notify threads waiting to buy tickets
+    }
+
+    public synchronized Ticket buyTicket() {
+        while (ticketQueue.isEmpty()) {
+            try {
+                System.out.println("No tickets available. Waiting for a ticket...");
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restore interrupted status
+                throw new IllegalStateException("Thread was interrupted while buying a ticket.", e);
+            }
+        }
         Ticket ticket = ticketQueue.poll();
-        if(ticket != null){
+        if (ticket != null) {
             ticketsPurchased.incrementAndGet();
+            System.out.println("Ticket purchased: " + ticket);
         }
+        notifyAll(); // Notify threads waiting to add tickets
         return ticket;
     }
-/*the number of tickets bought, only have readability access, maintaining integrity*/
+
+    // Getter Methods
+
     public int getTicketsReleased() {
         return ticketsReleased.get();
     }
@@ -50,10 +84,40 @@ public class TicketPool {
         return ticketsPurchased.get();
     }
 
+    public int getPoolSize() {
+        return ticketQueue.size();
+    }
+
     public int getId() {
         return id;
     }
-    public int getPoolSize(){
-        return ticketQueue.size();
+
+    public int getMaximumNoOfTickets() {
+        return maximumNoOfTickets;
+    }
+
+
+    @Override
+    public String toString() {
+        return "TicketPool{" +
+                "id=" + id +
+                ", maximumNoOfTickets=" + maximumNoOfTickets +
+                ", ticketsReleased=" + ticketsReleased +
+                ", ticketsPurchased=" + ticketsPurchased +
+                ", currentPoolSize=" + ticketQueue.size() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TicketPool that = (TicketPool) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
     }
 }
